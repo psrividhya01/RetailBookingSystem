@@ -1,0 +1,55 @@
+<div class="page-container">
+  <section class="info-side">
+    <div class="info-content">
+      <h1>Satisfy your <br> cravings.</h1>
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-side">
+    <div class="form-wrapper">
+      <header class="form-header">
+        <div class="logo">SAVR<span class="leaf">🌿</span></div>
+        <h2>Welcome Back </h2>
+        <p class="subtitle">Enter your Email address or Password for <span>LOG IN.</span></p>
+      </header>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label>Email address</label>
+          <div class="input-wrapper">
+            <input type="email" placeholder="john.doe@gmail.com" formControlName="email">
+            <span class="icon-check">✔</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <input type="password" placeholder="••••••••" formControlName="password">
+            <span class="icon-eye">👁</span>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-container">
+            <input type="checkbox"> Remember me
+          </label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-signin" [disabled]="loginForm.invalid">Sign In</button>
+      </form>
+
+      <p class="signup-text">
+        Don’t have account? 
+        <a routerLink="/register" class="signup-link">Sign Up</a>
+      </p>
+      
+    </div>
+  </section>
+</div>
