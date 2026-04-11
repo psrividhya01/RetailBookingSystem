@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../services/auth'; 
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 })
 export class Login {
   
+  private router = inject(Router); // Modern way to inject in Angular 21
+
   loginForm = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -27,12 +29,12 @@ export class Login {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.getRawValue();
       console.log('Logging in with:', loginData);
-      // Perform your API logic here
+      console.log('Login success!');
+      this.router.navigate(['/home']);  // Navigate to home page
     } else {
       this.loginForm.markAllAsTouched();
     }
   }
-
   showPassword = false;
 
   togglePassword() {
