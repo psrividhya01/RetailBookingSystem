@@ -28,3 +28,7 @@ export interface CartItem {
   category: string;
   quantity: number; // ← this must be present
 }
+export interface Category {
+  name: string;
+  imageUrl: string;
+}

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Login } from './login/login';
 import { Register } from './register/register';
-import { AuthGuard } from './guards/auth-guard';
+import { Home } from './home/home';
 
 export const routes: Routes = [
   { path: 'login', component: Login },
@@ -9,18 +9,17 @@ export const routes: Routes = [
 
   {
     path: 'home',
-    loadComponent: () => import('./dashboard/dashboard').then((m) => m.Dashboard),
-    canActivate: [AuthGuard],
+    loadComponent: () => import('./home/home').then((m) => Home),
   },
+
   {
     path: 'menu',
     loadComponent: () => import('./menu/menu').then((m) => m.Menu),
-    canActivate: [AuthGuard],
   },
+
   {
     path: 'cart',
     loadComponent: () => import('./cart/cart').then((m) => m.CartComponent),
-    canActivate: [AuthGuard],
   },
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },

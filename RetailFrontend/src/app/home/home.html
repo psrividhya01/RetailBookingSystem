@@ -1,11 +1,11 @@
-<app-navbar></app-navbar>
-
 <div class="home-page">
   <section class="hero-section">
     @for (slide of slides; track $index) {
-      <div class="slide" 
-           [class.active]="$index === currentSlide()"
-           [style.background-image]="'url(' + slide.image + ')'">
+      <div
+        class="slide"
+        [class.active]="$index === currentSlide()"
+        [style.background-image]="'url(' + slide.image + ')'"
+      >
         <div class="slide-content">
           <span class="badge">Limited Time Offer</span>
           <h1>{{ slide.title }}</h1>
@@ -35,12 +35,12 @@
       <h2>Top Rated for You</h2>
       <a routerLink="/menu" class="view-all">View Menu</a>
     </div>
-    
+
     <div class="horizontal-scroll product-slider">
       @for (item of featuredItems(); track item.id) {
         <div class="product-card" routerLink="/menu">
           <div class="img-box">
-            <img [src]="item.imageUrl" [alt]="item.name">
+            <img [src]="item.imageUrl" [alt]="item.name" />
             <span class="rating-tag">⭐ {{ item.rating }}</span>
           </div>
           <div class="product-info">

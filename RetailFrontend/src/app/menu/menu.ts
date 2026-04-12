@@ -1,18 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Navbar } from '../navbar/navbar';
+
 import { CartService } from '../services/cart-service';
 import { MenuItem } from '../models/user';
-
-interface Category {
-  name: string;
-  imageUrl: string;
-}
+import { Category } from '../models/user';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, Navbar],
+  imports: [CommonModule],
   templateUrl: './menu.html',
   styleUrls: ['./menu.css'],
 })

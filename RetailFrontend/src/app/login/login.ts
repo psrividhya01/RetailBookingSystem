@@ -3,17 +3,20 @@ import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../services/auth';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Navbar } from '../navbar/navbar';
-import { CartComponent } from '../cart/cart';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, Navbar, CartComponent],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
+  constructor(
+    private auth: Auth,
+    private router: Router,
+  ) {}
+
   loginForm = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -25,19 +28,30 @@ export class Login {
     }),
   });
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const loginData = this.loginForm.getRawValue();
-      console.log('Logging in with:', loginData);
-      // Perform your API logic here
-    } else {
-      this.loginForm.markAllAsTouched();
-    }
-  }
-
   showPassword = false;
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const loginData = this.loginForm.getRawValue();
+
+      this.auth.login(loginData).subscribe({
+        next: (res) => {
+          console.log('Login success', res);
+
+          // redirect to home
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          console.log('Login failed', err);
+          alert('Invalid email or password');
+        },
+      });
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
   }
 }

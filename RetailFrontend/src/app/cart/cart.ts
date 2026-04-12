@@ -2,14 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { Navbar } from '../navbar/navbar';
+
 import { CartService } from '../services/cart-service';
 import { CartItem } from '../models/user';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, Navbar],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './cart.html',
   styleUrls: ['./cart.css'],
 })
