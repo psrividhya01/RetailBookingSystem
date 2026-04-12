@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { CartService } from '../services/cart-service';
 import { MenuItem } from '../models/user';
@@ -14,6 +15,7 @@ import { Category } from '../models/user';
 })
 export class Menu implements OnInit {
   private cartService = inject(CartService);
+  private router = inject(Router);
 
   categories: Category[] = [
     { name: 'All', imageUrl: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100' },
@@ -189,7 +191,14 @@ export class Menu implements OnInit {
     this.filteredItems = items;
   }
 
-  addToCart(item: MenuItem): void {
+  addToCart(item: MenuItem, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
     this.cartService.addItem(item);
+  }
+
+  viewItem(itemId: number): void {
+    this.router.navigate(['/item', itemId]);
   }
 }
