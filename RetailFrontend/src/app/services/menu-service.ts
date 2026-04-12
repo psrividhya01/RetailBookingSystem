@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { MenuItem } from '../models/user';
+import { Category, MenuItem } from '../models/user';
 @Injectable({ providedIn: 'root' })
 export class MenuService {
   private apiUrl = 'http://localhost:5001/api';
@@ -19,5 +19,8 @@ export class MenuService {
 
   getMenuItemById(id: number): Observable<MenuItem> {
     return this.http.get<MenuItem>(`${this.apiUrl}/menu/${id}`);
+  }
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.apiUrl}/categories`);
   }
 }
