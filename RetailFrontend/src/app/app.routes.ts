@@ -23,6 +23,11 @@ export const routes: Routes = [
   },
 
   {
+    path: 'item/:id',
+    loadComponent: () => import('./item/item').then((m) => m.Item),
+  },
+
+  {
     path: 'profile',
     loadComponent: () => import('./profile/profile').then((m) => m.Profile),
   },

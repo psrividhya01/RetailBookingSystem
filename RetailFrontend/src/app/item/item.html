@@ -1,0 +1,42 @@
+<div class="item-page" *ngIf="selectedItem; else missingItem">
+  <div class="item-top">
+    <button class="back-btn" (click)="goBack()">← Back to Menu</button>
+  </div>
+
+  <div class="item-card">
+    <div class="item-image">
+      <img [src]="selectedItem.imageUrl" [alt]="selectedItem.name" />
+      <span class="diet-label" [class.veg]="selectedItem.isVeg" [class.nonveg]="!selectedItem.isVeg">
+        {{ selectedItem.isVeg ? 'Veg' : 'Non-Veg' }}
+      </span>
+    </div>
+
+    <div class="item-details">
+      <h1>{{ selectedItem.name }}</h1>
+      <p class="category-tag">{{ selectedItem.category }}</p>
+      <div class="price-rating-row">
+        <span class="price">₹{{ selectedItem.price }}</span>
+        <span class="rating">⭐ {{ selectedItem.rating }}</span>
+      </div>
+      <p class="description">{{ selectedItem.description }}</p>
+      <button class="primary-btn" (click)="addToCart(selectedItem)">Add to Cart</button>
+    </div>
+  </div>
+
+  <section class="similar-section" *ngIf="similarItems.length > 0">
+    <h2>More from {{ selectedItem.category }}</h2>
+    <div class="similar-grid">
+      <div class="similar-card" *ngFor="let item of similarItems" (click)="navigateToItem(item.id)">
+        <img [src]="item.imageUrl" [alt]="item.name" />
+        <span>{{ item.name }}</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<ng-template #missingItem>
+  <div class="item-page empty-state">
+    <p>Item not found. Please go back to the menu.</p>
+    <button class="secondary-btn" (click)="goBack()">Back to Menu</button>
+  </div>
+</ng-template>
