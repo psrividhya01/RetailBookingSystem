@@ -1,10 +1,10 @@
-﻿namespace Retail_Backend.Models
+namespace Retail_Backend.Models
 {
-    public class Cart
+    public class Wishlist
     {
         public int Id { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
-        public List<CartItem> CartItems { get; set; }
+        public List<WishlistItem> WishlistItems { get; set; }
     }
 }
