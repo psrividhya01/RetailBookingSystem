@@ -1,0 +1,119 @@
+:host {
+  --bg-dark: #000000;
+  --card-dark: #0a0a0a;
+  --accent-green: #2ecc71;
+  --text-gray: #888;
+  --input-bg: #151515;
+}
+
+.page-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: white;
+}
+
+/* Left Side Styling */
+.info-side {
+  background-color: #0f0f0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  text-align: center;
+}
+
+.hero-image {
+  width: 80%;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+}
+
+.info-side h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.info-side p { color: var(--text-gray); font-size: 0.9rem; line-height: 1.6; }
+
+/* Right Side Styling */
+.form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.form-wrapper { width: 100%; max-width: 420px; }
+
+.logo { color: var(--accent-green); font-weight: 800; font-size: 1.5rem; margin-bottom: 1.5rem; }
+
+.subtitle span { color: var(--accent-green); cursor: pointer; }
+
+/* Form Fields */
+.field { margin-bottom: 1.2rem; }
+label { display: block; font-size: 0.8rem; color: var(--text-gray); margin-bottom: 0.5rem; }
+
+.input-wrapper {
+  position: relative;
+  background: var(--input-bg);
+  border-radius: 8px;
+  border: 1px solid #222;
+}
+
+input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 12px 15px;
+  color: white;
+  outline: none;
+}
+
+.icon-check { position: absolute; right: 15px; top: 12px; color: var(--accent-green); }
+.icon-eye { position: absolute; right: 15px; top: 12px; color: var(--text-gray); cursor: pointer; }
+
+/* Buttons & Actions */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin: 1.5rem 0;
+}
+
+.btn-signin {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent-green);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.social-btn {
+  width: 100%;
+  padding: 12px;
+  background: #111;
+  border: 1px solid #222;
+  color: white;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.divider {
+  text-align: center;
+  border-bottom: 1px solid #222;
+  line-height: 0.1em;
+  margin: 20px 0;
+}
+.divider span { background: var(--bg-dark); padding: 0 10px; color: #444; font-size: 0.8rem; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .page-container { grid-template-columns: 1fr; }
+  .info-side { display: none; }
+}

@@ -1,0 +1,60 @@
+<div class="page-container">
+  <section class="info-side">
+    <div class="info-content">
+      <h1>Join the<br>community<br>and feel<br>the Ecstasy</h1>
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-side">
+    <div class="form-wrapper">
+      <header class="form-header">
+        <div class="logo">SAVR<span class="leaf">🌿</span></div>
+        <h2>Create Account</h2>
+        <p class="subtitle">Fill in your details to <span>SIGN UP.</span></p>
+      </header>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <div class="field">
+          <label>Full Name</label>
+          <div class="input-wrapper">
+            <input type="text" placeholder="John Doe" formControlName="name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Email address</label>
+          <div class="input-wrapper">
+            <input type="email" placeholder="john.doe@gmail.com" formControlName="email">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Phone Number</label>
+          <div class="input-wrapper">
+            <input type="tel" placeholder="1234567890" formControlName="phone">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <input type="password" placeholder="••••••••" formControlName="password">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-signin" [disabled]="registerForm.invalid">Create Account</button>
+      </form>
+
+      <p class="signup-text">
+        Already have an account? 
+        <a routerLink="/login" class="signup-link">Log In</a>
+      </p>
+      
+    </div>
+  </section>
+</div>

@@ -1,0 +1,82 @@
+<div class="menu-page">
+  <div class="hero-banner">
+    <div class="hero-text">
+      <h1>Hungry? We've got you 🍽️</h1>
+      <p>Order fresh food delivered to your door</p>
+    </div>
+  </div>
+
+  <div class="diet-toggle">
+    <button
+      class="diet-btn"
+      [class.veg-active]="dietFilter === 'veg'"
+      (click)="dietFilter = 'veg'; applyFilters()"
+    >
+      <span class="veg-dot"></span> Veg
+    </button>
+    <button
+      class="diet-btn"
+      [class.nonveg-active]="dietFilter === 'nonveg'"
+      (click)="dietFilter = 'nonveg'; applyFilters()"
+    >
+      <span class="nonveg-dot"></span> Non-Veg
+    </button>
+    <button
+      class="diet-btn"
+      [class.all-active]="dietFilter === 'all'"
+      (click)="dietFilter = 'all'; applyFilters()"
+    >
+      All
+    </button>
+  </div>
+
+  <div class="categories-wrapper">
+    <div class="categories">
+      <div
+        class="category-item"
+        *ngFor="let category of categories"
+        [class.active]="category.name === selectedCategory"
+        (click)="filterByCategory(category.name)"
+      >
+        <div class="category-img-wrapper">
+          <img [src]="category.imageUrl" [alt]="category.name" />
+        </div>
+        <span>{{ category.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <h2>
+      {{ selectedCategory === 'All' ? 'All Items' : selectedCategory }}
+      <span class="count">({{ filteredItems.length }} items)</span>
+    </h2>
+  </div>
+
+  <div class="empty-state" *ngIf="filteredItems.length === 0">
+    <div class="empty-icon">🍽️</div>
+    <p>No items found</p>
+  </div>
+
+  <div class="menu-grid" *ngIf="filteredItems.length > 0">
+    <div class="menu-card" *ngFor="let item of filteredItems" (click)="viewItem(item.id)">
+      <div class="card-image">
+        <img [src]="item.imageUrl" [alt]="item.name" />
+        <span
+          class="diet-badge"
+          [class.veg-badge]="item.isVeg"
+          [class.nonveg-badge]="!item.isVeg"
+        ></span>
+      </div>
+      <div class="card-body">
+        <h3>{{ item.name }}</h3>
+        <p class="item-desc">{{ item.description }}</p>
+        <div class="card-meta">
+          <span class="price">₹{{ item.price }}</span>
+          <span class="rating">⭐ {{ item.rating }}</span>
+        </div>
+        <button class="add-btn" (click)="addToCart(item, $event)">+ Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>

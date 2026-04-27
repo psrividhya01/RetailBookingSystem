@@ -1,0 +1,103 @@
+<div class="profile-page">
+  <header class="profile-header">
+    <div>
+      <h1>My Profile</h1>
+      <p>Update your details, review wishlist and orders, then logout when you're done.</p>
+    </div>
+  </header>
+
+  <section class="profile-card">
+    <h2>Profile details</h2>
+
+    <div class="field-grid">
+      <div class="field-block">
+        <label for="fullName">Full name</label>
+        <input id="fullName" type="text" [(ngModel)]="profile.fullName" />
+      </div>
+      <div class="field-block">
+        <label for="email">Email</label>
+        <input id="email" type="email" [(ngModel)]="profile.email" readonly />
+      </div>
+      <div class="field-block">
+        <label for="phone">Phone number</label>
+        <input id="phone" type="tel" [(ngModel)]="profile.phone" />
+      </div>
+      <div class="field-block">
+        <label for="addressName">Address name</label>
+        <input id="addressName" type="text" [(ngModel)]="profile.addressName" />
+      </div>
+      <div class="field-block">
+        <label for="addressLine">Street address</label>
+        <input id="addressLine" type="text" [(ngModel)]="profile.addressLine" />
+      </div>
+      <div class="field-block">
+        <label for="city">City</label>
+        <input id="city" type="text" [(ngModel)]="profile.city" />
+      </div>
+      <div class="field-block">
+        <label for="state">State</label>
+        <input id="state" type="text" [(ngModel)]="profile.state" />
+      </div>
+      <div class="field-block">
+        <label for="zip">Zip code</label>
+        <input id="zip" type="text" [(ngModel)]="profile.zip" />
+      </div>
+      <div class="field-block">
+        <label for="country">Country</label>
+        <input id="country" type="text" [(ngModel)]="profile.country" />
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <button type="button" class="save-btn" (click)="saveProfile()">Save changes</button>
+      <span class="save-message" *ngIf="savedMessage">{{ savedMessage }}</span>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <h2>Wishlist</h2>
+      <p>Items saved for later.</p>
+    </div>
+
+    <div *ngIf="wishlist.length; else noWishlist">
+      <ul class="wishlist-list">
+        <li *ngFor="let item of wishlist">
+          <span>{{ item.name }}</span>
+          <strong>{{ item.price }}</strong>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noWishlist>
+      <p class="empty-state">Your wishlist is empty.</p>
+    </ng-template>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <h2>Order history</h2>
+      <p>Recent purchases and order status.</p>
+    </div>
+
+    <div *ngIf="orderHistory.length; else noOrders">
+      <div class="order-card" *ngFor="let order of orderHistory">
+        <div class="order-row">
+          <span class="order-id">Order #{{ order.id }}</span>
+          <span class="order-status">{{ order.status }}</span>
+        </div>
+        <div class="order-row order-details">
+          <span>{{ order.date }}</span>
+          <span class="order-total">{{ order.total }}</span>
+        </div>
+        <p class="order-items">{{ order.items }}</p>
+      </div>
+    </div>
+    <ng-template #noOrders>
+      <p class="empty-state">You have not placed any orders yet.</p>
+    </ng-template>
+  </section>
+
+  <div class="logout-panel">
+    <button type="button" class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</div>

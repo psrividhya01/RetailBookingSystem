@@ -1,0 +1,100 @@
+<div class="cart-container">
+  <!-- Empty State -->
+  <div class="empty-cart" *ngIf="cartItems.length === 0">
+    <div class="empty-icon">🛒</div>
+    <h2>Your cart is empty</h2>
+    <p>Add items from the menu to get started</p>
+    <button routerLink="/menu">Browse Menu</button>
+  </div>
+
+  <div class="cart-layout" *ngIf="cartItems.length > 0">
+    <!-- Left: Cart Items -->
+    <div class="cart-items">
+      <h2>
+        Your Cart <span class="item-count">({{ totalItems }} items)</span>
+      </h2>
+
+      <div class="cart-card" *ngFor="let item of cartItems">
+        <img [src]="item.imageUrl" [alt]="item.name" class="item-img" />
+
+        <div class="item-details">
+          <h3>{{ item.name }}</h3>
+          <p class="item-category">{{ item.category }}</p>
+          <p class="item-price">
+            ₹{{ item.price }} × {{ item.quantity }}
+            <strong>= ₹{{ item.price * item.quantity }}</strong>
+          </p>
+        </div>
+
+        <div class="item-actions">
+          <!-- Quantity controls -->
+          <div class="qty-control">
+            <button class="qty-btn" (click)="decrease(item)">−</button>
+            <span class="qty-value">{{ item.quantity }}</span>
+            <button class="qty-btn" (click)="increase(item)">+</button>
+          </div>
+          <!-- Remove -->
+          <button class="remove-btn" (click)="remove(item)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Price Summary -->
+    <div class="price-summary">
+      <h2>Price Details</h2>
+
+      <div class="summary-row">
+        <span>Subtotal ({{ totalItems }} items)</span>
+        <span>₹{{ subtotal }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Delivery Fee</span>
+        <span>₹{{ deliveryFee }}</span>
+      </div>
+      <div class="summary-row">
+        <span>GST (5%)</span>
+        <span>₹{{ tax }}</span>
+      </div>
+      <div class="summary-row discount-row" *ngIf="appliedDiscount > 0">
+        <span>Discount Applied</span>
+        <span class="discount-amount">− ₹{{ appliedDiscount }}</span>
+      </div>
+
+      <hr />
+
+      <div class="summary-row total-row">
+        <span>Total</span>
+        <span>₹{{ total }}</span>
+      </div>
+
+      <!-- Savings badge -->
+      <div class="savings-badge" *ngIf="appliedDiscount > 0">
+        You're saving ₹{{ appliedDiscount }} on this order!
+      </div>
+
+      <!-- Coupon -->
+      <div class="coupon-section">
+        <h3>Apply Coupon</h3>
+        <div class="coupon-input-row">
+          <input
+            type="text"
+            placeholder="Enter coupon code"
+            [(ngModel)]="discountCode"
+            [disabled]="appliedDiscount > 0"
+          />
+          <button class="apply-btn" (click)="applyDiscount()" *ngIf="appliedDiscount === 0">
+            Apply
+          </button>
+          <button class="remove-coupon-btn" (click)="resetDiscount()" *ngIf="appliedDiscount > 0">
+            Remove
+          </button>
+        </div>
+        <p class="coupon-error" *ngIf="discountError">{{ discountError }}</p>
+        <p class="coupon-success" *ngIf="discountSuccess">{{ discountSuccess }}</p>
+      </div>
+
+      <!-- Place Order -->
+      <button class="order-btn" (click)="placeOrder()">Place Order · ₹{{ total }}</button>
+    </div>
+  </div>
+</div>

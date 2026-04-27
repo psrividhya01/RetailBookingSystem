@@ -1,0 +1,54 @@
+<div class="home-page">
+  <section class="hero-section">
+    @for (slide of slides; track $index) {
+      <div
+        class="slide"
+        [class.active]="$index === currentSlide()"
+        [style.background-image]="'url(' + slide.image + ')'"
+      >
+        <div class="slide-content">
+          <span class="badge">Limited Time Offer</span>
+          <h1>{{ slide.title }}</h1>
+          <p>{{ slide.sub }}</p>
+          <button routerLink="/menu" class="cta-btn">Order Now</button>
+        </div>
+      </div>
+    }
+  </section>
+
+  <section class="section-container">
+    <div class="section-header">
+      <h2>What's on your mind?</h2>
+    </div>
+    <div class="horizontal-scroll">
+      @for (cat of categories; track cat.name) {
+        <div class="category-card" (click)="navigateToCategory(cat.name)">
+          <div class="cat-icon-circle">{{ cat.icon }}</div>
+          <span>{{ cat.name }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="section-container">
+    <div class="section-header">
+      <h2>Top Rated for You</h2>
+      <a routerLink="/menu" class="view-all">View Menu</a>
+    </div>
+
+    <div class="horizontal-scroll product-slider">
+      @for (item of featuredItems(); track item.id) {
+        <div class="product-card" routerLink="/menu">
+          <div class="img-box">
+            <img [src]="item.imageUrl" [alt]="item.name" />
+            <span class="rating-tag">⭐ {{ item.rating }}</span>
+          </div>
+          <div class="product-info">
+            <h3>{{ item.name }}</h3>
+            <p>₹{{ item.price }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</div>
